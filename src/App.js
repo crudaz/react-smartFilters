@@ -16,7 +16,7 @@ function App() {
         <DeliveryStatus />
       </div>
 
-      <div class="span-col-3">
+      <div className="span-col-3">
         <MenuTop />
         <Search />
         <DeliveryDetail />
