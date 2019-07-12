@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import logo from './logo.png';
 
+import Grid from '@material-ui/core/Grid';
 
 // Components
 import SmartFilter from './components/smartFilter';
@@ -26,11 +27,13 @@ function App() {
     { id: 4, name: 'Settings', icon: 'calendar' },
     { id: 5, name: 'My Account', icon: 'calendar' }
   ];
+  
   const filters = [
     { id: 1, icon: sale, op: 'disabled' },
     { id: 2, icon: calendar, op: 'disabled' },
     { id: 3, icon: heart, op: 'disabled' }
   ];
+  
   const deliveryList = [
     {
       id: 1,
@@ -70,19 +73,30 @@ function App() {
   
   return (
     <div className="app">      
-      <div>
+      <div className="sidebar">
         <img className="logo" src={logo} alt="" />
         
-        <p>Smart Filters</p>
-        <hr />
-        <SmartFilter list={filters}/>
-        <hr />
+        <div className="section">
+          <div className="title">
+            <i className="material-icons">highlight</i>
+            <p>Smart Filters</p>
+          </div>
+          <div className="filter">
+            <SmartFilter list={filters}/>
+          </div>
+        </div>  
 
-        <DeliveryStatus />
+        <div className="section">
+          <DeliveryStatus />
+        </div>
+        
       </div>
 
       <div className="span-col-3">
-        <MenuTop list={menuList}/>
+
+        <Grid item xs={12} className="menu">
+          <MenuTop list={menuList}/>
+        </Grid>
         
         <Checkbox
           checked={state.checkedA}
@@ -94,7 +108,10 @@ function App() {
         />
 
         <SearchBar />
-        <DeliveryDetail list={deliveryList} />
+
+        <div className="delivery">
+          <DeliveryDetail list={deliveryList} />
+        </div>
 
         <i className="material-icons">add_circle</i>
 
