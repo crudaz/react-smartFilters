@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -19,8 +20,20 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-const DeliveryDetail = ({list}) => {
+const useStyles = makeStyles(theme => ({
+    card: {
+        borderRadius: 50,
+        margin: 20
+    },
+    cardContent: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    }
+  }));
 
+const DeliveryDetail = ({list}) => {
+    const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -34,8 +47,8 @@ const DeliveryDetail = ({list}) => {
 
     return (
         list.map( item => (
-            <Card>
-                <CardContent>
+            <Card key={item.id} className={classes.card}>
+                <CardContent className={classes.cardContent}>
                     <Typography color="textSecondary" gutterBottom>
                         {item.date}
                     </Typography>
@@ -55,7 +68,7 @@ const DeliveryDetail = ({list}) => {
                         {item.quantity}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                     <div>
                         <IconButton
                             aria-label="More"
@@ -86,7 +99,7 @@ const DeliveryDetail = ({list}) => {
                         </Menu>
                     </div>
 
-                </CardActions>
+                </CardActions> */}
             </Card>
         ))
      );
