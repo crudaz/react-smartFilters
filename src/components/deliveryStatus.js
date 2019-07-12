@@ -1,17 +1,37 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 import SearchBar from '../components/searchBar';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+    },
+    title: {
+        textAlign: 'center'
+    },
+    status: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        height: 42,
+        marginTop: 10
+    },
+}));
+
 const DeliveryStatus = () => {
+    const classes = useStyles();
     return ( 
-        <React.Fragment>
-            <p>Status</p>
+        <div className={classes.root}>
+            <div className={classes.title}>Status</div>
             <SearchBar />
-            <Button variant="contained">
+            <span className={classes.status}>
                 DELIVERED
-            </Button>
-        </React.Fragment>
+            </span>
+        </div>
      );
 }
  
