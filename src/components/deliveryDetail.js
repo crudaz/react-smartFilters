@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, rgbToHex } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,10 +7,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import Navigation from '@material-ui/icons/Navigation';
+
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+import truck from '../assets/icons/truck.png';
 
 
 const options = [
@@ -28,7 +33,69 @@ const useStyles = makeStyles(theme => ({
     cardContent: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        color: 'rgba(0, 0, 0, 0.54)',
+        alignItems: 'center',
+        padding: '0 !important'
+    },
+    date: {
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'center',
+        textAlign: 'center',
+        width: 0,
+        padding: 20,
+        maxWidth: 90
+    },
+    deliver: {
+        display: 'flex',
+        borderLeft: '1px solid gray',
+        borderRight: '1px solid gray',
+        padding: 20,
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
+    address: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    icon: {
+        display: 'flex',
+        alignItems: 'center',
+        paddingRight: 20,
+    },
+    materialIcon: {
+        fontSize: 64,
+        color: 'orange'
+    },
+    navigationIcon: {
+        fontSize: 36,
+        transform: 'rotate(45deg)'
+    },
+    image: {
+        height: 70
+    },
+    right: {
+        display: 'flex',
+        flexGrow: 2,
+        alignItems: 'center',
+        justifyContent: 'inherit'
+    },
+    price: {
+        fontSize: 28,
+        fontWeight: 500,
+        transform: 'scale(1, 1.2)'
+    },
+    qa: {
+        display: 'flex',
+        backgroundColor: 'rgb(234, 83, 86)',
+        padding: 15,
+        borderRadius: 5,
+        color: 'white',
+        width: 18,
+        justifyContent: 'center'
     }
   }));
 
@@ -45,61 +112,56 @@ const DeliveryDetail = ({list}) => {
         setAnchorEl(null);
     }
 
+    function ArrowDownIcon(props) {
+        return (
+            <KeyboardArrowDown {...props} />
+        );
+    }
+
+    function NavigationIcon(props) {
+        return (
+            <Navigation {...props} />
+        );
+    }
+
+    function OptionIcon(props) {
+        return (
+            <IconButton {...props} 
+                aria-label="More"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+            >
+                <MoreVertIcon />
+            </IconButton>
+        );
+    }
+
     return (
         list.map( item => (
             <Card key={item.id} className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography color="textSecondary" gutterBottom>
-                        {item.date}
-                    </Typography>
-                    <Typography color="textSecondary">
-                        {item.from}
-                    </Typography>
-                    <Typography color="textSecondary">
-                        {item.to}
-                    </Typography>
-                    <i className="material-icons">
-                        directions_transit
-                    </i>
-                    <Typography color="textSecondary">
-                        {item.price}
-                    </Typography>
-                    <Typography color="textSecondary">
-                        {item.quantity}
-                    </Typography>
-                </CardContent>
-                {/* <CardActions>
-                    <div>
-                        <IconButton
-                            aria-label="More"
-                            aria-controls="long-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                        >
-                            <MoreVertIcon />
-                        </IconButton>
-                        <Menu
-                            id="long-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={open}
-                            onClose={handleClose}
-                            PaperProps={{
-                            style: {
-                                maxHeight: ITEM_HEIGHT * 4.5,
-                                width: 200,
-                            },
-                            }}
-                        >
-                            {options.map(option => (
-                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                                {option}
-                            </MenuItem>
-                            ))}
-                        </Menu>
+
+                    <div className={classes.date}>{item.date}</div>
+                    
+                    <div className={classes.deliver}>
+                        <div className={classes.icon}>
+                            <NavigationIcon className={classes.navigationIcon} />
+                        </div>
+                        <div className={classes.address}>
+                            <div>{item.from}</div>
+                            <ArrowDownIcon className={classes.materialIcon} />
+                            <div>{item.to}</div>
+                        </div>
                     </div>
 
-                </CardActions> */}
+                    <div className={classes.right}>
+                        <img src={truck} alt="" className={classes.image} />
+                        <div className={classes.price}>$ {item.price}</div>
+                        <div className={classes.qa}>{item.quantity}</div>
+                        <OptionIcon />
+                    </div>
+
+                </CardContent>
             </Card>
         ))
      );

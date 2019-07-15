@@ -1,14 +1,26 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 
-// Icons
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
+
+const useStyles = makeStyles({
+    root: {
+        // backgroundColor: 'rgb(26,57,72)'
+        color: 'rgb(56,56,56)'
+    },
+    "&$selected": {
+        color: "red"
+      },
+      selected: {}
+});
 
 const MenuTop = ({list}) => {
+    const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    
     return (
         list.map(item => (
             <Grid item xs key={item.id}>
@@ -18,8 +30,9 @@ const MenuTop = ({list}) => {
                         setValue(newValue);
                     }}
                     showLabels
+                    className={classes.root}
                 >
-                    <BottomNavigationAction label={item.name} icon={<HomeIcon />} />
+                    <BottomNavigationAction label={item.name} icon={item.icon} />
                 </BottomNavigation>
             </Grid>
         ))

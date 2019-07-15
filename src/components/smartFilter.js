@@ -17,13 +17,13 @@ const IOSSwitch = withStyles(theme => ({
         transform: 'translateX(26px)',
         color: theme.palette.common.white,
         '& + $track': {
-          backgroundColor: '#52d869',
+          backgroundColor: 'rgb(26,57,72)',
           opacity: 1,
           border: 'none',
         },
       },
       '&$focusVisible $thumb': {
-        color: '#52d869',
+        color: 'rgb(26,57,72)',
         border: '6px solid #fff',
       },
     },
@@ -79,7 +79,7 @@ const SmartFilter = ({list}) => {
     const classes = useStyles();
 
     const handleChange = name => event => {
-        setState({ ...state, [name]: event.target.checked });
+        // setState({ ...state, [name]: event.target.checked });
     };
 
     return (
@@ -91,8 +91,8 @@ const SmartFilter = ({list}) => {
                 <FormControlLabel className={classes.control}
                     control={
                     <IOSSwitch key={item.id}
-                        checked={state.checkedB}
-                        onChange={handleChange('checkedB')}
+                        checked={item.checked}
+                        // onChange={handleChange('checkedB')}
                         value="checkedB"
                     />
                     }
