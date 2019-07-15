@@ -50,3 +50,10 @@
 .delivery {
 
 }
+
+.addIcon {
+  font-size: 86px !important;
+  color: rgb(236, 140, 57);
+  float: right;
+  margin-top: -60px;
+}
